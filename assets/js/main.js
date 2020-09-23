@@ -3,18 +3,39 @@
     // initial array of expenses, reading from localStorage
 
     var expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    
+    date.max = new Date().toISOString().split("T")[0];
+    mobDate.max = new Date().toISOString().split("T")[0];
+    let form = document.getElementById('exp-Form');
 
-    document.getElementById('exp-Form').addEventListener('submit', function (e) {
-
+    form.onsubmit = function(e){
         e.preventDefault();
+        
+        let type, name, date, amount;
+
+        // get type, name, date, and amount - MOBILE
+        let mobType = document.getElementById('mobType').value;
+        let mobName = document.getElementById('mobName').value;
+        let mobDate = document.getElementById('mobDate').value;
+        let mobAmount = parseInt(document.getElementById('mobAmount').value);
 
         // get type, name, date, and amount
-        let type = document.getElementById('type').value;
-        let name = document.getElementById('name').value;
-        let date = document.getElementById('date').value;
-        var amount = parseInt(document.getElementById('amount').value);
-        if (type == 'chooseOne' || name.length <= 0 || date == '') {
-            return;
+        let typeData = document.getElementById('type').value;
+        let nameData = document.getElementById('name').value;
+        let dateData = document.getElementById('date').value;
+        let amountData = parseInt(document.getElementById('amount').value);
+
+
+        if (mobType !== '' && mobName !== '' && mobDate !== '' && mobAmount !== ''){
+            type = mobType;
+            name = mobName;
+            date = mobDate;
+            amount = mobAmount;
+        } else if (typeData !== '' && nameData !== '' && dateData !== '' && amountData !== ''){
+            type = typeData;
+            name = nameData;
+            date = dateData;
+            amount = amountData;
         }
 
         var expense = {
@@ -28,13 +49,13 @@
         expenses.push(expense);
         localStorage.setItem("expenses", JSON.stringify(expenses))
         totalExpense();
-        document.getElementById('exp-Form').reset();
+        form.reset();
         showExpenses();
+        
+        console.log(expense);
+    };
 
-    });
-
-    console.log(expenses);
-
+    // get total of all transaction types
     let cardTotal, cashTotal, cryptoTotal, othersTotal;
     let cardArray = [];
     let cashArray = [];
@@ -56,11 +77,8 @@
         }
     });
 
+    // store all transaction types in array
     var amountArray = [cardTotal, cashTotal, cryptoTotal, othersTotal];
-
-    console.log(amountArray)
-
-
 
     function totalExpense() {
         var totalExpense = document.getElementById("expense-amount");
@@ -68,12 +86,9 @@
             return sum + a.amount;
         }, 0);
         totalExpense.innerText = total;
-
     }
 
-
     function showExpenses() {
-
         const expenseTable = document.getElementById('expenseTable');
         expenseTable.innerHTML = '';
 
@@ -95,8 +110,7 @@
 
         const expenseTdTypeEl = document.createElement('TD');
         expenseTdTypeEl.setAttribute('colspan', 5);
-        expenseTdTypeEl.textContent =
-            'No expense items yet! Please add one up top...';
+        expenseTdTypeEl.textContent = 'No expense items yet! Please add one up top...';
         expenseRowEl.appendChild(expenseTdTypeEl);
 
         return expenseRowEl;
@@ -134,15 +148,19 @@
             showExpenses();
         }
 
-        deleteAnchorEl.innerHTML = `<button type="button" id= "rem" class="btn btn-danger pt-2"><i class="fa fa-trash" aria-hidden="true"></i></button>`;
+        deleteAnchorEl.innerHTML = `<button type="button" id= "rem" class="btn btn-danger btn-sm mt-2"><i class="fa fa-trash" aria-hidden="true"></i></button>`;
         expenseRowEl.appendChild(deleteAnchorEl);
 
         const expenseTdOptionsE2 = document.createElement('TD');
         const ModifyAnchorE2 = document.createElement('A');
         ModifyAnchorE2.className = "ModifyButton";
         ModifyAnchorE2.onclick = function (e) {
-            let name = document.getElementById('name').value;
-            if (name.value == "") {
+            // let name = document.getElementById('name').value;
+            let nameData = document.querySelectorAll('#name');
+            nameData.forEach(function(nameEntry){
+                return name = nameEntry.value;
+            });
+            if (name == "") {
                 alert('please enter Modify')
             } else {
                 ModifyExpense(expense.id);
@@ -154,7 +172,6 @@
         // ModifyAnchorE2.innerHTML = '<button type="button" id= "modify" class="btn btn-primary ml-2" >Modify</button>';
         expenseRowEl.appendChild(ModifyAnchorE2);
 
-
         return expenseRowEl;
 
     }
@@ -163,28 +180,49 @@
         for (let i = 0; i < expenses.length; i++) {
             if (expenses[i].id == id) {
                 expenses.splice(i, 1);
-
             }
-            totalExpense()
+            totalExpense();
         }
-
-
     }
 
     showExpenses();
 
     function ModifyExpense(id) {
-        let name = document.getElementById('name').value;
+        // let name = document.getElementById('name').value;
+        let nameData = document.querySelectorAll('#name');
+            nameData.forEach(function(nameEntry){
+                return name = nameEntry.value;
+            });
         if (name === '') {
             alert('please enter modify')
         } else {
             for (let i = 0; i < expenses.length; i++) {
                 if (expenses[i].id == id) {
                     expenses.splice(i, 1);
-                    let type = document.getElementById('type').value;
-                    let name = document.getElementById('name').value;
-                    let date = document.getElementById('date').value;
-                    let amount = document.getElementById('amount').value;
+                    // let type = document.getElementById('type').value;
+                    // let name = document.getElementById('name').value;
+                    // let date = document.getElementById('date').value;
+                    // let amount = document.getElementById('amount').value;
+
+                    let typeData = document.querySelectorAll('#type');
+                    let nameData = document.querySelectorAll('#name');
+                    let dateData = document.querySelectorAll('#date');
+                    let amountData = document.querySelectorAll('#amount');
+                    let type, name, date, amount;
+
+                    typeData.forEach(function(typeEntry){
+                        return type = typeEntry.value;
+                    });
+                    nameData.forEach(function(nameEntry){
+                        return name = nameEntry.value;
+                    });
+                    dateData.forEach(function(dateEntry){
+                        return date = dateEntry.value;
+                    });
+                    amountData.forEach(function(amountEntry){
+                        return amount = parseInt(amountEntry.value);
+                    });
+
                     if (type == 'chooseOne' || name.length <= 0 || date == '') {
                         return;
                     }
@@ -200,7 +238,7 @@
                     // localStorage 
                     localStorage.setItem('expenses', JSON.stringify(expenses));
 
-                    document.getElementById('exp-Form').reset();
+                    form.reset();
                     showExpenses();
                     totalExpense();
                 }
@@ -208,18 +246,10 @@
         }
     }
 
-
-
-
     showExpenses();
-
     totalExpense();
 
-    let weeklyTransactionsChart = document.getElementById('transactionsChart').getContext('2d');
-    let monthlyTransactionsChart = document.getElementById('transactionsChart').getContext('2d');
-    let yearlyTransactionsChart = document.getElementById('transactionsChart').getContext('2d');
-
-    // import { amountArray } from 'app.js;'
+    let myTransactionsChart = document.getElementById('transactionsChart').getContext('2d');
 
     // Global Options
     Chart.defaults.global.defaultFontFamily = 'Source Sans Pro, sans-serif';
@@ -233,7 +263,7 @@
     window.onload = expenseData();
 
     function expenseData() {
-        let ExpenseChart = new Chart(monthlyTransactionsChart, {
+        let ExpenseChart = new Chart(myTransactionsChart, {
             type: 'doughnut',
             data: {
                 labels: ['Card', 'Cash', 'Cryptocoin', 'Others'],

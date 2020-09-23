@@ -29,7 +29,7 @@
 <body>
     <div class="container-sm">
         <header>
-            <h1 class="title">Expense Tracker</h1>
+            <h1 class="title mt-5"> <span><img src="assets/pictures/wallet-money-vector-icon.jpg" alt="" srcset=""></span> Expense Tracker</h1>
             <header>
                 <section id="wrap">
                     <div class="row">
@@ -43,63 +43,73 @@
 
                         </div>
 
-
-                        <form id="exp-Form">
-                            <div class="form-group row">
-                                <label for="Title" class="col-form-label ml-4 mr-2">Type</label>
-                                <div class="input-group mb-3 w-25">
-                                    <select class="custom-select" id="type">
-                                        <option value="chooseOne" selected>Choose...</option>
-                                        <option value="card">Card</option>
-                                        <option value="cash">Cash</option>
-                                        <option value="cryptocoin">Cryptocoin</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                <label for="name" class="report col-form-label ml-4 mr-3 ">Report</label>
-                                <input class=" col form-control form-control w-25 " id="name" type="text"
-                                    placeholder="Report..." autocomplete="off" autocapitalize="capitalize">
-                            </div>
-                            <div class="form-group row">
-                                <label for="Date" class=" col-form-label ml-4 mr-2">Date</label>
-                                <input class="col form-control form-control  w-25  " id="date" type="date">
-                                <label for="Amount" class=" col-form-label ml-4 mr-2">Amount</label>
-                                <input class="col form-control form-control  w-25  " id="amount" type="number"
-                                    placeholder="Amount..." oninput="this.value = Math.abs(this.value)"
-                                    autocomplete="off">
-                            </div>
-                            <button type="submit" id="add" class=" button-save btn btn-success mb-5 ml-5 w-25"><i
-                                    class="fa fa-plus" aria-hidden="true"></i></button>
-
-                            <!-- Trigger the modal with a button -->
-                            <button type="button" class="button-chart btn btn-lg mb-5 ml-5 mr-1 float-right"
-                                data-toggle="modal" data-target="#myModal"><i class="fa fa-bar-chart"
-                                    aria-hidden="true"></i></button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModal" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Chart <i class="fa fa-line-chart"
-                                                    aria-hidden="true"></i>
-                                            </h4>
+                        <div class="col-12">
+                            <form id="exp-Form">
+                                <!-- Mobile view -->
+                                <section class="d-md-none pt-3">
+                                    <div class="form-group row">
+                                        <label for="Title" class="col-3 col-form-label ml-4 mr-2">Type</label>
+                                        <div class="col-7 input-group w-75 px-0">
+                                            <select class="custom-select" id="mobType">
+                                                <option value="chooseOne" selected>Choose...</option>
+                                                <option value="card">Card</option>
+                                                <option value="cash">Cash</option>
+                                                <option value="cryptocoin">Cryptocoin</option>
+                                                <option value="other">Other</option>
+                                            </select>
                                         </div>
-                                        <div class="modal-body">
-                                            <div>
-
-                                                <canvas id="transactionsChart"></canvas>
-                                            </div>
-                                        </div>
-
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="name" class="col-3 report col-form-label ml-4 mr-2">Report</label>
+                                        <input class="col-7 form-control form-control w-25" id="mobName" type="text"
+                                            placeholder="Note..." autocomplete="off" autocapitalize="capitalize">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="Date" class="col-3  col-form-label ml-4 mr-2">Date</label>
+                                        <input class="col-7 form-control form-control  w-25" id="mobDate" type="date">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="Amount" class="col-3 col-form-label ml-4 mr-2">Amount</label>
+                                        <input class="col-7 form-control form-control  w-25" id="mobAmount" type="number" placeholder="Amount..." oninput="this.value = Math.abs(this.value)" autocomplete="off">
+                                    </div>
+                                </section>
+                                <!-- End Mobile view -->
 
+                                <!-- Tab and Desktop view -->
+                                <section class="d-none d-md-block">
+                                    <div class="form-group row">
+                                        <label for="Title" class="col-form-label ml-4 mr-2">Type</label>
+                                        <div class="input-group mb-3 col-4">
+                                            <select class="custom-select" id="type">
+                                                <option value="chooseOne" selected>Choose...</option>
+                                                <option value="card">Card</option>
+                                                <option value="cash">Cash</option>
+                                                <option value="cryptocoin">Cryptocoin</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <label for="name" class="report col-form-label ml-4 mr-2">Report</label>
+                                        <input class="col-5 form-control form-control" id="name" type="text" placeholder="Note..." autocomplete="off" autocapitalize="capitalize">
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="Date" class="col-form-label ml-4 mr-2">Date</label>
+                                        <input class="col-4 form-control form-control" id="date" type="date">
+                                        <label for="Amount" class=" col-form-label ml-4 mr-2">Amount</label>
+                                        <input class="col-5 form-control form-control" id="amount" type="number" placeholder="Amount..." oninput="this.value = Math.abs(this.value)" autocomplete="off">
+                                    </div>
+                                </section>
+                                <!-- End Tab and Desktop view -->
+
+                                <!-- Add new expense button -->
+                                <div class="row mb-5 px-2 float-right">
+                                    <div class="col-12 px-1">
+                                        <button type="submit" id="add" class="rounded-circle button-save btn btn-success">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
 
                         <div class="col-12 myTbl">
                             <table class="table">
@@ -109,12 +119,43 @@
                                         <th>Report</th>
                                         <th>Date</th>
                                         <th>Amount</th>
-                                        <!-- <th>Options</th> -->
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody id="expenseTable">
                                 </tbody>
                             </table>
+                        </div>
+
+                        <!-- Trigger the modal with a button -->
+                        <div class="col-12">
+                            <button type="button" class="button-chart btn text-white bg-dark rounded-circle px-2 py-1 float-right" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Chart <i class="fa fa-line-chart"
+                                                aria-hidden="true"></i>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div>
+
+                                            <canvas id="transactionsChart"></canvas>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </section>

@@ -1,76 +1,78 @@
+:root {
+  --primaryColor: #ffa82e;
+}
+
 body{
-    font-family: 'Courier New', Courier, monospace;
-    line-height: 1.4;
-    /* font-size: 14px; */
-    font-weight: 100;
-    padding: 0px;
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 1.4;
+  /* font-size: 14px; */
+  font-weight: 100;
+  padding: 0px;
+}
+img{
+  width: 50px;
+  height: 50px;
 }
 #wrap{
-    position: relative;
-    max-width: 690px;
-    height: auto;
-    /* border: 2px solid #000000; */
-    margin: 50px auto;
-    padding: 30px;
-    box-sizing: border-box;
-   background:#ffa82e ;
+  position: relative;
+  max-width: 690px;
+  height: auto;
+  /* border: 2px solid #000000; */
+  margin: 50px auto;
+  padding: 30px;
+  box-sizing: border-box;
+  background: var(--primaryColor);
 }
 
 #wrap:after{
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    /* border-top: 2px solid #000000; */
-    border-bottom: 0px solid #ffffff;
-    /* border-left: 2px solid #000000; */
-    border-right: 0px solid #ffffff;
-    top: 0%;
-    left: 10%;
-    margin-left: -25px;
-    content: '';
-    transform: rotate(45deg);
-    margin-top: -25px;
-    background-color:#ffa82e;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  /* border-top: 2px solid #000000; */
+  border-bottom: 0px solid #ffffff;
+  /* border-left: 2px solid #000000; */
+  border-right: 0px solid #ffffff;
+  top: 0%;
+  left: 10%;
+  margin-left: -25px;
+  content: '';
+  transform: rotate(45deg);
+  margin-top: -25px;
+  background-color: var(--primaryColor);
 }
+
 #credit{
   color: green;
 }
 
 tr{
-    color: black;
+  color: black;
 }
 
-.button-chart{
-  border-radius: 50%;
-  
-}
 h1{
   font-family: 'Solway', serif;
- margin-top: 50px;
- margin-left: 50px;
 }
- h4{
-  columns: #000000;;
+
+h4{
+  columns: #000000;
 }
+
 .modal-body{
   color: aqua;
-  
 }
+
 .new-item{
   font-family: 'Balsamiq Sans', cursive;
 }
+
 #expense-amount{
   font-weight: 600;
 }
+
 .myTbl{
   overflow-x: auto;
 }
 
-.button-chart{
-  background-color: #000000;
-  color: #ffffff;
+.btn:hover{
+  color: var(--primaryColor);
 }
-#credit{
-  color: green;
-}
-   

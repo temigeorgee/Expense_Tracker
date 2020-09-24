@@ -25,34 +25,44 @@
         let dateData = document.getElementById('date').value;
         let amountData = parseInt(document.getElementById('amount').value);
 
-
-        if (mobType !== '' && mobName !== '' && mobDate !== '' && mobAmount !== ''){
-            type = mobType;
-            name = mobName;
-            date = mobDate;
-            amount = mobAmount;
-        } else if (typeData !== '' && nameData !== '' && dateData !== '' && amountData !== ''){
-            type = typeData;
-            name = nameData;
-            date = dateData;
-            amount = amountData;
+        if (mobType ==="Choose..."|| mobName ==="" || mobDate ===""|| mobAmount ==="") {
+        desktop();
+        }else{
+            type=mobType; name=mobName; date=mobDate; amount=mobAmount;
+            var expense = {
+                type,
+                name,
+                date,
+                amount,
+                id: expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 1,
+            }
+            expenses.push(expense);
+            localStorage.setItem("expenses", JSON.stringify(expenses))
+            totalExpense();
+            form.reset();
+            showExpenses();
         }
 
-        var expense = {
-            type,
-            name,
-            date,
-            amount,
-            id: expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 1,
-        }
-
-        expenses.push(expense);
-        localStorage.setItem("expenses", JSON.stringify(expenses))
-        totalExpense();
-        form.reset();
-        showExpenses();
         
-        console.log(expense);
+        function desktop(){
+            if (typeData ==="Choose..."|| nameData ==="" || dateData ===""|| amountData ==="") {
+                return;
+                }else{
+                    type=typeData; name=nameData; date=dateData; amount=amountData;
+                    var expense = {
+                        type,
+                        name,
+                        date,
+                        amount,
+                        id: expenses.length > 0 ? expenses[expenses.length - 1].id + 1 : 1,
+                    }
+                    expenses.push(expense);
+                    localStorage.setItem("expenses", JSON.stringify(expenses))
+                    totalExpense();
+                    form.reset();
+                    showExpenses();
+                }
+        }
     };
 
     // get total of all transaction types
